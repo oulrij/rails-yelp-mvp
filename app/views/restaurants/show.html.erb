@@ -1,0 +1,19 @@
+<h1><%= @restaurant.name %></h1>
+<ul class="list-inline">
+  <li><%= @restaurant.phone_number ? @restaurant.phone_number : 'No phone number' %>&nbsp;|</li>
+  <li><%= @restaurant.address %></li>
+</ul>
+
+<h2>Reviews</h2>
+<p><%= link_to 'Add review', new_restaurant_review_path(@restaurant), class: "btn btn-primary" %></p>
+<% @restaurant.reviews.each do |review| %>
+  <% if review.rating %>
+    <h4><% review.rating.times do  %><i class="fas fa-star"></i><% end %>
+    <% (5 - review.rating).times do  %><i class="far fa-star"></i><% end %></h4>
+  <% else %>
+    <h4>No rating provided yet</h4>
+  <% end %>
+<p><%= review.content %></p>
+<br>
+<% end %>
+<p><%= link_to 'Add review', new_restaurant_review_path(@restaurant), class: "btn btn-primary" %></p>
